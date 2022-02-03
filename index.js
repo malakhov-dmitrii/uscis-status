@@ -1,5 +1,5 @@
 const fastify = require('fastify')({ logger: true });
-const puppeteer = require('puppeteer');
+const puppeteer = require('puppeteer-core');
 const { Telegraf } = require('telegraf');
 
 const NUMBER = 'WAC2208151046';
