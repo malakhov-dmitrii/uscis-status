@@ -1,6 +1,7 @@
 const fastify = require('fastify')({ logger: true });
 const puppeteer = require('puppeteer-core');
 const { Telegraf } = require('telegraf');
+const chrome = require('chrome-aws-lambda');
 
 const NUMBER = 'WAC2208151046';
 const TELEGRAM_BOT_TOKEN = '1717140057:AAEsfxVO9GRl-yGc_uZdX0-QIIX9yWXG8hc';
