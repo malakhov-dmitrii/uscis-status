@@ -39,6 +39,13 @@ fastify.get('/', async (request, reply) => {
 
   return { status: text };
 });
+// Declare a route
+fastify.get('/api/check', async (request, reply) => {
+  const text = await main();
+  bot.sendMessage(TELEGRAM_CHAT_ID, text);
+
+  return { status: text };
+});
 
 // Run the server!
 const start = async () => {
