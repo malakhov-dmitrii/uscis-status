@@ -21,17 +21,12 @@ RUN npm install
 
 ENV NODE_ENV production
 
-# Copy hello-cron file to the cron.d directory
-COPY cron /etc/cron.d/cron
- 
-# Give execution rights on the cron job
-RUN chmod 0644 /etc/cron.d/cron
+# copy crontabs for root user
+COPY cron /etc/crontabs/root
 
-# Apply cron job
-RUN crontab /etc/cron.d/cron
- 
-# Run the command on container startup
-CMD cron
+# start crond with log level 8 in foreground, output to stderr
+CMD ["crond", "-f", "-d", "8"]
+
 
 ENV PORT 80
 EXPOSE 80
