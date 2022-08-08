@@ -12,6 +12,9 @@ const bot = new Telegraf(TELEGRAM_BOT_TOKEN);
 const main = async () => {
   const browser = await puppeteer.launch({
     args: ['--disable-gpu', '--disable-dev-shm-usage', '--disable-setuid-sandbox', '--no-sandbox'],
+    headless: true,
+
+    executablePath: '/usr/bin/chromium-browser',
   });
 
   const page = await browser.newPage();
