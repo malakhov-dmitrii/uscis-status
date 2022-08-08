@@ -1,3 +1,4 @@
+const cron = require('node-cron');
 const fastify = require('fastify')({ logger: true });
 const puppeteer = require('puppeteer-core');
 const { Telegraf } = require('telegraf');
@@ -44,14 +45,6 @@ fastify.get('/', async (request, reply) => {
   return { status: text };
 });
 
-// Declare a route
-fastify.get('/api/check', async (request, reply) => {
-  const text = await main();
-  bot.telegram.sendMessage(TELEGRAM_CHAT_ID, text);
-
-  return { status: text };
-});
-
 // Run the server!
 const start = async () => {
   try {
@@ -62,3 +55,10 @@ const start = async () => {
   }
 };
 start();
+
+cron.schedule('* * * * *', function () {
+  main().then(text => {
+    console.log({ text });
+    bot.telegram.sendMessage(TELEGRAM_CHAT_ID, text);
+  });
+});
