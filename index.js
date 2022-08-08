@@ -58,7 +58,7 @@ fastify.get('/api/check', async (request, reply) => {
 // Run the server!
 const start = async () => {
   try {
-    await fastify.listen(process.env.PORT);
+    await fastify.listen({ port: process.env.PORT, host: '0.0.0.0' });
   } catch (err) {
     fastify.log.error(err);
     process.exit(1);
