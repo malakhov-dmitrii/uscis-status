@@ -8,6 +8,7 @@ const TELEGRAM_BOT_TOKEN = '1717140057:AAEsfxVO9GRl-yGc_uZdX0-QIIX9yWXG8hc';
 const TELEGRAM_CHAT_ID = '264414372';
 
 const bot = new Telegraf(TELEGRAM_BOT_TOKEN);
+
 const main = async () => {
   const browser = await puppeteer.launch(
     process.env.NODE_ENV === 'production'
@@ -45,6 +46,7 @@ fastify.get('/', async (request, reply) => {
 
   return { status: text };
 });
+
 // Declare a route
 fastify.get('/api/check', async (request, reply) => {
   const text = await main();
