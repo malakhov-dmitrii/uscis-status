@@ -1,7 +1,7 @@
 FROM node:14-alpine
 
 WORKDIR /puppeteer
-RUN apt-get install -y 
+RUN apt-get install -y \
     fonts-liberation \
     gconf-service \
     libappindicator1 \
