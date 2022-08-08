@@ -37,5 +37,6 @@ const main = async () => {
 };
 
 main().then(text => {
+  console.log({ text });
   bot.telegram.sendMessage(TELEGRAM_CHAT_ID, text);
 });
