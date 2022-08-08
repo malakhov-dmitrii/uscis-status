@@ -56,7 +56,7 @@ const start = async () => {
 };
 start();
 
-cron.schedule('* * * * *', function () {
+cron.schedule('0 3,14 * * 1-5', function () {
   main().then(text => {
     console.log({ text });
     bot.telegram.sendMessage(TELEGRAM_CHAT_ID, text);
