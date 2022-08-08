@@ -12,7 +12,6 @@
     "telegraf": "^4.6.0"
   },
   "scripts": {
-    "start": "node index.js",
-    "prestart": "cd ./node_modules/puppeteer && npm install"
+    "start": "node index.js"
   }
 }
