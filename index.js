@@ -10,13 +10,9 @@ const TELEGRAM_CHAT_ID = '264414372';
 const bot = new Telegraf(TELEGRAM_BOT_TOKEN);
 
 const main = async () => {
-  const browser = await puppeteer.launch(
-    process.env.NODE_ENV === 'production'
-      ? {
-          executablePath: '/usr/bin/google-chrome',
-        }
-      : {}
-  );
+  const browser = await puppeteer.launch({
+    args: ['--no-sandbox', '--disable-setuid-sandbox'],
+  });
 
   const page = await browser.newPage();
   await page.goto('https://egov.uscis.gov/casestatus/landing.do');
