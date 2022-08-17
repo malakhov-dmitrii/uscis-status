@@ -45,6 +45,7 @@ const main = async () => {
 // Declare a route
 fastify.get('/', async (request, reply) => {
   const text = await main();
+  console.log({ text });
   bot.telegram.sendMessage(TELEGRAM_CHAT_ID, text);
 
   return { status: text };
