@@ -35,7 +35,11 @@ const main = async () => {
   const text = await page.$eval('h1', el => el.innerText);
   await browser.close();
 
-  return text;
+  const distance = formatDistanceToNowStrict(new Date(2022, 9, 3), { unit: 'day', roundingMethod: 'ceil' });
+
+  return `${text}
+  
+*${distance}* days left`;
 };
 
 // Declare a route
@@ -60,12 +64,6 @@ start();
 cron.schedule('0 3,14 * * 1-5', function () {
   main().then(text => {
     console.log({ text });
-    const distance = formatDistanceToNowStrict(new Date(2022, 9, 3), { unit: 'day', roundingMethod: 'ceil' });
-    bot.telegram.sendMessage(
-      TELEGRAM_CHAT_ID,
-      `${text}
-
-*${distance}* days left`
-    );
+    bot.telegram.sendMessage(TELEGRAM_CHAT_ID, text);
   });
 });
