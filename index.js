@@ -1,3 +1,4 @@
+const { formatDistanceToNow, formatDistanceToNowStrict } = require('date-fns');
 const cron = require('node-cron');
 const fastify = require('fastify')({ logger: true });
 const puppeteer = require('puppeteer-core');
@@ -59,6 +60,12 @@ start();
 cron.schedule('0 3,14 * * 1-5', function () {
   main().then(text => {
     console.log({ text });
-    bot.telegram.sendMessage(TELEGRAM_CHAT_ID, text);
+    const distance = formatDistanceToNowStrict(new Date(2022, 9, 3), { unit: 'day', roundingMethod: 'ceil' });
+    bot.telegram.sendMessage(
+      TELEGRAM_CHAT_ID,
+      `${text}
+
+*${distance}* days left`
+    );
   });
 });
