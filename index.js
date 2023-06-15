@@ -5,7 +5,8 @@ const puppeteer = require('puppeteer-core');
 const { Telegraf } = require('telegraf');
 // const chrome = require('chrome-aws-lambda');
 
-const NUMBER = 'WAC2208151046';
+// const NUMBER = 'WAC2208151046';
+const NUMBER = 'БП 81322/2023';
 const TELEGRAM_BOT_TOKEN = '1717140057:AAEsfxVO9GRl-yGc_uZdX0-QIIX9yWXG8hc';
 const TELEGRAM_CHAT_ID = '264414372';
 
@@ -20,26 +21,24 @@ const main = async () => {
   });
 
   const page = await browser.newPage();
-  await page.goto('https://egov.uscis.gov/casestatus/landing.do');
+  await page.goto(
+    'https://pretraga2.apr.gov.rs/PretragePodatakaOPrimljenimRegistracionimPrijavamaIZalbama/Search/SearchByRegistrationNumber'
+  );
 
   // find the form input by id "receipt_number"
-  await page.type('#receipt_number', NUMBER);
+  await page.type('#registrationNumber', NUMBER);
 
   // find  the input with type 'submit'
   await page.click('input[type="submit"]');
 
   // wait for the page to load
-  await page.waitForNavigation();
+  // await page.waitForNavigation();
+  await page.waitForSelector('#ResultSection');
 
   // find the value of h1
-  const text = await page.$eval('h1', el => el.innerText);
+  const text = await page.$eval('#ResultSection', el => el.innerText);
   await browser.close();
-
-  const distance = formatDistanceToNowStrict(new Date(2022, 9, 3), { unit: 'day', roundingMethod: 'ceil' });
-
-  return `${text}
-  
-*${distance}* days left`;
+  return `${text}`;
 };
 
 // Declare a route
